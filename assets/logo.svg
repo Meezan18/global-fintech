@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 64" fill="none">
+  <defs>
+    <linearGradient id="ring" x1="4" y1="4" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00d4ff"/>
+      <stop offset="0.5" stop-color="#2563ff"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="asc" x1="15" y1="42" x2="47" y2="17" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22e0ff"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- mark -->
+  <g>
+    <circle cx="32" cy="32" r="26.5" stroke="url(#ring)" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="32" cy="32" r="20.5" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1.2"/>
+    <g stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 42 L31 27 L40 18" stroke="url(#asc)" stroke-width="4.6"/>
+      <path d="M40 18 L38.8 24.9 M40 18 L33.1 19.2" stroke="url(#asc)" stroke-width="4.6"/>
+    </g>
+  </g>
+
+  <!-- wordmark -->
+  <text x="86" y="34" font-family="Space Grotesk, Poppins, Segoe UI, Arial, sans-serif" font-size="27" font-weight="700" letter-spacing="4" fill="#eef2ff">GLOBAL</text>
+  <text x="88" y="58" font-family="Space Grotesk, Poppins, Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="7" fill="url(#asc)">FINTECH</text>
+</svg>

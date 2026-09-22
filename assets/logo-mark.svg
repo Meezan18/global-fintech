@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="ring" x1="4" y1="4" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00d4ff"/>
+      <stop offset="0.5" stop-color="#2563ff"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="asc" x1="15" y1="42" x2="47" y2="17" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22e0ff"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- coin -->
+  <circle cx="32" cy="32" r="26.5" stroke="url(#ring)" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="32" cy="32" r="20.5" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1.2"/>
+
+  <!-- rising market trend + arrowhead -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 42 L31 27 L40 18" stroke="url(#asc)" stroke-width="4.6"/>
+    <path d="M40 18 L38.8 24.9 M40 18 L33.1 19.2" stroke="url(#asc)" stroke-width="4.6"/>
+  </g>
+</svg>
