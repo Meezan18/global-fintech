@@ -179,9 +179,32 @@
 
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(45, containerW / containerH, 0.1, 1000);
-    var baseZ = containerW < 768 ? 24 : 18;
+    var baseZ = 18;
+    var lookY = 2.2;
+
+    /* The desktop framing is tuned for a wide hero. On narrow/portrait
+       viewports the horizontal field of view collapses, so pull the camera
+       back (and aim a little lower) to keep the whole market in frame. */
+    var REF_ASPECT = 1.6;
+    var REF_Z = 18;
+
+    function frameCamera(w, h) {
+      var aspect = w / Math.max(h, 1);
+      var narrow = aspect < REF_ASPECT;
+      if (narrow) {
+        baseZ = Math.min(40, Math.max(REF_Z, REF_Z * (REF_ASPECT / aspect) * 0.55));
+        lookY = 1.4;
+      } else {
+        baseZ = REF_Z;
+        lookY = 2.2;
+      }
+      camera.aspect = aspect;
+      camera.updateProjectionMatrix();
+    }
+    frameCamera(containerW, containerH);
+
     camera.position.set(13, 8.5, baseZ);
-    camera.lookAt(0, 2.2, 0);
+    camera.lookAt(0, lookY, 0);
 
     var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -189,10 +212,13 @@
     host.appendChild(renderer.domElement);
 
     var mouse = { x: 0, y: 0 };
-    document.addEventListener("pointermove", function (e) {
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    });
+    var finePointer = window.matchMedia("(pointer: fine)").matches;
+    if (finePointer) {
+      document.addEventListener("pointermove", function (e) {
+        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      });
+    }
 
     var market = new THREE.Group();
     scene.add(market);
@@ -592,7 +618,7 @@
 
       /* camera breathing, always looking at the market */
       camera.position.z = baseZ + Math.sin(t * 0.4) * 0.5;
-      camera.lookAt(0, 2.2, 0);
+      camera.lookAt(0, lookY, 0);
 
       renderer.render(scene, camera);
     }
@@ -602,8 +628,7 @@
     function onResize() {
       var w = host.parentElement.offsetWidth;
       var h = host.parentElement.offsetHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
+      frameCamera(w, h);
       renderer.setSize(w, h);
     }
     window.addEventListener("resize", onResize);
